@@ -1,6 +1,29 @@
-<h1>Gestión Categorias</h1>
+<div class="card">
+    <h1>Gestión Categorias</h1>
 
-{{ categorias }}
+    <p-table [value]="categorias" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Detalle</th>
+                <th>Gestión</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categoria>
+            <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nombre }}</td>
+                <td>{{ categoria.detalle }}</td>
+                <td>
+                
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <hr>
+
 <input type="text" name="nombre" [(ngModel)]="categoria.nombre">
 <input type="text" name="detalle" [(ngModel)]="categoria.detalle">
 <button (click)="funGuardarCategoria()">Guardar Categoria</button>
@@ -27,3 +50,5 @@
         }
     </tbody>
 </table>
+
+</div>
