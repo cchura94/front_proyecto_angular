@@ -9,8 +9,9 @@ import { CoreModule } from '../core/core.module';
 import { FormsModule } from '@angular/forms';
 import { ProductoComponent } from './components/producto/producto.component';
 import { AppLayoutModule } from '../layout/app.layout.module';
+import { PrimeModule } from '../prime/prime.module';
 
-import { TableModule } from 'primeng/table';
+
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { TableModule } from 'primeng/table';
     FormsModule,
     AppLayoutModule,
 
-    TableModule
+    PrimeModule
     
   ]
 })

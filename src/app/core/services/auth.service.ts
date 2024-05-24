@@ -15,4 +15,8 @@ export class AuthService {
     return this.http.post(`${this.urlBase}/v1/auth/login`, credenciales)
   }
 
+  perfil(){
+    return this.http.get(`${this.urlBase}/v1/auth/profile`);
+  }
+
 }

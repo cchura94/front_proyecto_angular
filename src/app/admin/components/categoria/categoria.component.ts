@@ -10,6 +10,7 @@ export class CategoriaComponent {
 
   categorias: any[] = []
   categoria: any = {};
+  visible: boolean = false;
 
   constructor(private categoriaService: CategoriaService){
     this.funGetCategorias()
@@ -29,6 +30,7 @@ export class CategoriaComponent {
       this.categoriaService.modificarCategoria(this.categoria.id, this.categoria).subscribe(
         (res: any) => {
           console.log(res);
+          this.visible = false
           this.funGetCategorias();
         },
         (error) => {  }
@@ -38,12 +40,14 @@ export class CategoriaComponent {
       this.categoriaService.guardarCategoria(this.categoria).subscribe(
         (res: any) => {
           console.log(res);
+          this.visible = false
           this.funGetCategorias();
         },
         (error) => {  }
       );
 
     }
+    
     this.categoria = {};
   }
 
@@ -58,6 +62,18 @@ export class CategoriaComponent {
       this.funGetCategorias();
     }
 
+  }
+
+  openDialog(data: any){
+    let misdatos = data
+    const {id, nombre, detalle} = misdatos;
+    this.categoria = {id, nombre, detalle}
+    this.visible = true;
+  }
+
+  nuevoOpenDialog(){
+    this.categoria = {}
+    this.visible = true;
   }
 
 

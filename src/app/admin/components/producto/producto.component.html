@@ -1,4 +1,10 @@
 <h1>Productos</h1>
+<select [(ngModel)]="categoria_seleccionada" (change)="funObtenerLosProductos()">
+    @for (item of categorias; track $index) {
+        <option [value]="item.id"  >{{ item.nombre }}</option>
+    }
+</select>
+
 <table border="1">
     <thead>
         <tr>
