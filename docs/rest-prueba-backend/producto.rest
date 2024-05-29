@@ -1,0 +1,3 @@
+GET https://lv.blumbit.net/back/public/api/producto?page=1&limit=10&q=SILLA
+Authorization: Bearer 215|c1zVnhgHN2xc7q0FOpYxqr35C6IG0yzYVULB2OMQ4b118717
+Accept: application/json

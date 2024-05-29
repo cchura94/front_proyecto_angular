@@ -11,7 +11,11 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
-  listarProductos(page:number, limit:number){
-    return this.http.get(`${this.urlBase}/producto?page=${page}&limit=${limit}`)
+  listarProductos(page:number, limit:number, q: string){
+    return this.http.get(`${this.urlBase}/producto?page=${page}&limit=${limit}&q=${q}`)
+  }
+
+  actualizaImagen(id:any, formData: any){
+    return this.http.post(`${this.urlBase}/producto/${id}/carga-imagen`, formData)
   }
 }

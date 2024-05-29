@@ -3,6 +3,9 @@ import { ProductoService } from '../../../core/services/producto.service';
 import { CategoriaService } from '../../../core/services/categoria.service';
 import { LazyLoadEvent } from 'primeng/api';
 
+import jsPDF from "jspdf";
+import autoTable from 'jspdf-autotable'
+
 interface Producto{
   id?: number,
   nombre: string,
@@ -35,6 +38,12 @@ export class ProductoComponent {
 
     loading: boolean = false;
 
+    imagenProductoDialog: boolean = false
+
+    uploadedFiles: any[] =[];
+
+    buscador: string = ''
+
 
   // productoService2 = inject(ProductoService)
   // categoriaService2 = inject(CategoriaService)
@@ -45,9 +54,9 @@ export class ProductoComponent {
     this.getCategorias();
   }
 
-  getProductos(page:number = 1, limit:number = 10){
+  getProductos(page:number = 1, limit:number = 10, q=''){
     this.loading = true;
-    this.productoService.listarProductos(page, limit).subscribe(
+    this.productoService.listarProductos(page, limit, q).subscribe(
       (res: any) => {
         console.log(res);
         this.productos = res.data
@@ -110,5 +119,47 @@ deleteProduct(product: Producto) {
   });
   */
 }
+
+actualizaImagen(producto: Producto){
+  this.producto = producto;
+
+  this.imagenProductoDialog = true;
+
+}
+
+subirImagen(event: any) {
+  console.log(event)
+  let formData = new FormData()
+  formData.append("imagen", event.files[0]);
+
+  this.productoService.actualizaImagen(this.producto.id, formData).subscribe(
+    (res: any) => {
+      this.imagenProductoDialog = false;
+      this.producto = {nombre: "", imagen: "", stock: 0, precio:0, descripcion: ""};
+      this.uploadedFiles = [];
+      this.getProductos()
+    }
+  )
+}
+
+  exportarPDF(){
+    const doc = new jsPDF();
+
+    const filas = this.productos.map(item => [item.id, item.nombre, item.precio, item.stock, , item.categoria.nombre])
+
+    autoTable(doc, {
+      head: [['id', 'Nombre', 'Precio', 'Stock', 'categoria']],
+      body: filas,
+    })
+
+
+    doc.save("a4.pdf");
+  }
+
+  buscar(event: KeyboardEvent){
+    if(event.key === 'Enter'){
+      this.getProductos(1, 10, this.buscador)
+    }
+  }
 
 }

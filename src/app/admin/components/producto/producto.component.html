@@ -13,6 +13,13 @@
         </ng-template>
 
         <ng-template pTemplate="right">
+
+            <p-button 
+                pRipple 
+                severity="help" 
+                label="Exportar PDF" 
+                (click)="exportarPDF()"/>
+
             <select [(ngModel)]="categoria_seleccionada" (change)="funObtenerLosProductos()">
                 @for (item of categorias; track $index) {
                     <option [value]="item.id"  >{{ item.nombre }}</option>
@@ -57,7 +64,9 @@
                     <input 
                         pInputText 
                         type="text" 
-                        placeholder="Search..." />
+                        [(ngModel)]="buscador"
+                        (keydown)="buscar($event)"
+                        placeholder="Buscar..." />
                 </span>
             </div>
         </ng-template>
@@ -99,6 +108,14 @@
                 <td>
                     <p-button 
                         pRipple 
+                        icon="pi pi-image" 
+                        class="mr-2" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        severity="success" 
+                        (click)="actualizaImagen(product)" />
+                    <p-button 
+                        pRipple 
                         icon="pi pi-pencil" 
                         class="mr-2" 
                         [rounded]="true" 
@@ -121,6 +138,25 @@
             </div>
         </ng-template>
     </p-table>
+
+        <p-dialog header="Actualiza Imagen" [modal]="true" [(visible)]="imagenProductoDialog" [style]="{ width: '50rem' }">
+            <span class="p-text-secondary block mb-5">Actualiza Imagen.</span>
+           
+            <p-fileUpload 
+                name="demo[]" 
+                [customUpload]="true"
+                (uploadHandler)="subirImagen($event)"
+                [multiple]="false" 
+                accept="image/*" >
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">
+                                {{ file.name }} - {{ file.size }} bytes
+                            </li>
+                        </ul>
+                    </ng-template>
+            </p-fileUpload>
+        </p-dialog>
 
 
 </div>
