@@ -1,0 +1,87 @@
+<div class="card">
+    <p-table
+        #dt
+        [value]="productos"
+        [rows]="3"
+        [lazy]="true"
+        [paginator]="true"
+        [totalRecords]="totalRecords"
+        [rowsPerPageOptions]="[3, 5, 10, 20]"
+        (onLazyLoad)="loadProductos($event)"
+        [loading]="loading"
+        [tableStyle]="{ 'min-width': '3rem' }"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} Productos"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Venta Productos</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input 
+                        pInputText 
+                        type="text" 
+                        [(ngModel)]="buscador"
+                        (keydown)="buscar($event)"
+                        placeholder="Buscar..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" style="min-width:3rem">
+                    Nombre
+                </th>
+                <th>
+                    Imagen
+                </th>
+                <th pSortableColumn="price">
+                    Precio <p-sortIcon field="price" />
+                </th>
+                <th pSortableColumn="category" style="min-width:3rem">
+                    Categoria <p-sortIcon field="category" />
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    {{ product.nombre }}
+                </td>
+                <td>
+                <img 
+                    [src]="'https://lv.blumbit.net/back/public/' + product.imagen" 
+                    [alt]="product.name" 
+                    width="50" 
+                    class="shadow-4" />
+                </td>
+                <td>
+                    {{ product.precio | currency : 'USD' }}
+                </td>
+                <td>
+                    {{ product.categoria?.nombre }}
+                </td>
+                <td>
+                    <p-button 
+                        pRipple 
+                        icon="pi pi-plus" 
+                        class="mr-2" 
+                        [rounded]="true" 
+                        [outlined]="false" 
+                        severity="success" 
+                        (click)="addCarrito(product)" />
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                En total son {{ productos ? productos.length : 0 }} productos.
+            </div>
+        </ng-template>
+    </p-table>
+
+
+</div>

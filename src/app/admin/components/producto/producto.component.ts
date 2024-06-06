@@ -5,15 +5,8 @@ import { LazyLoadEvent } from 'primeng/api';
 
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable'
+import { Producto } from '../../../core/interfaces/producto';
 
-interface Producto{
-  id?: number,
-  nombre: string,
-  precio: number,
-  descripcion: string,
-  imagen: string,
-  stock: number
-}
 
 @Component({
   selector: 'app-producto',

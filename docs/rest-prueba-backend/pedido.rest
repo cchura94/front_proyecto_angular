@@ -1,0 +1,24 @@
+GET https://lv.blumbit.net/back/public/api/pedido
+Authorization: Bearer 264|IqqOPMZQjxfRHPOnfrw3LMMIyyhD7jTMAZqvzfa2c922b6a2
+
+###
+
+POST https://lv.blumbit.net/back/public/api/pedido
+Authorization: Bearer 264|IqqOPMZQjxfRHPOnfrw3LMMIyyhD7jTMAZqvzfa2c922b6a2
+Content-Type: application/json
+Accept: application/json
+
+{
+    "cliente_id": 2,
+    "productos": [
+        {
+            "producto_id": 2,
+            "cantidad": 1
+        },
+        {
+            "producto_id": 4,
+            "cantidad": 2
+        }
+    ],
+    "observacion": "NINGUNA"
+}

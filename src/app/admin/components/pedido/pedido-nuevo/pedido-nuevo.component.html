@@ -1,0 +1,82 @@
+
+    <div class="grid nested-grid">
+        <div class="col-7">
+            <div class="card">
+                <div class="p-1 border-round-sm bg-primary font-bold">Lista Productos</div>
+                <app-pedido-producto [titulo]="'Lista de Productos'" (productoEvent)="agregarAlCarrito($event)"  />
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="grid">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="text-center p-1 border-round-sm bg-primary font-bold">Carrito</div>
+                       
+                        <p-table [value]="carrito" [tableStyle]="{ 'min-width': '5rem' }">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <th>PRECIO</th>
+                                    <th>Cant</th>
+                                    <th></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-prod>
+                                <tr>
+                                    <td>{{ prod.nombre }}</td>
+                                    <td>{{ prod.precio }}</td>
+                                    <td>{{ prod.cantidad }}</td>
+                                    <td>
+                                        <p-button 
+                                            pRipple 
+                                            icon="pi pi-trash" 
+                                            class="mr-2" 
+                                            [rounded]="true" 
+                                            severity="warning"  />
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <h2>TOTAL: $ {{ total }}</h2>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="text-center p-1 border-round-sm bg-primary font-bold">Cliente</div>
+                        <div class="flex align-items-center justify-content-between">
+                            <h5 class="m-0">Buscar Cliente</h5>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input 
+                                    pInputText 
+                                    type="text" 
+                                    [(ngModel)]="buscador"
+                                    (keydown)="buscar($event)"
+                                    placeholder="Buscar..." />
+                                    
+                            </span>
+                        </div>
+                        <div class="card" *ngIf="cliente_seleccionado?.id">
+                            <h4>CLIENTE: {{cliente_seleccionado.nombre_completo}}</h4>
+                            <h4>CI/NIT: {{cliente_seleccionado.ci_nit}}</h4>
+                            <h4>TELEFONO: {{cliente_seleccionado.telefono}}</h4>
+                            <h4>DIRECCION: {{cliente_seleccionado.direccion }}</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <button 
+                            pButton 
+                            pRipple 
+                            label="Registrar Pedido" 
+                            class="p-button-success"
+                            (click)="guardarPedido()"
+                            >
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

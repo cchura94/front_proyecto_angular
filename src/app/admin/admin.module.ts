@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { ProductoComponent } from './components/producto/producto.component';
 import { AppLayoutModule } from '../layout/app.layout.module';
 import { PrimeModule } from '../prime/prime.module';
+import { PedidoListaComponent } from './components/pedido/pedido-lista/pedido-lista.component';
+import { PedidoNuevoComponent } from './components/pedido/pedido-nuevo/pedido-nuevo.component';
+import { PedidoProductoComponent } from './components/pedido/pedido-producto/pedido-producto.component';
 
 
 
@@ -18,7 +21,10 @@ import { PrimeModule } from '../prime/prime.module';
   declarations: [
     PerfilComponent,
     CategoriaComponent,
-    ProductoComponent
+    ProductoComponent,
+    PedidoListaComponent,
+    PedidoNuevoComponent,
+    PedidoProductoComponent
   ],
   imports: [
     CommonModule,
